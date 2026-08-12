@@ -219,4 +219,8 @@ LOGOUT_REDIRECT_URL = "home"
 # DEFAULT PRIMARY KEY
 # ============================================================
 
+<<<<<<< HEAD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+=======
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+>>>>>>> 6f73efe (Add migrations)
