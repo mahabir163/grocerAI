@@ -1,13 +1,9 @@
 Django
-Pillow
 groq
 numpy
 pandas
 scikit-learn
-
-easyocr
-paddleocr
-paddlepaddle
 ultralytics
 requests
 rapidocr_onnxruntime
+gunicorn
