@@ -89,3 +89,64 @@ GrocerAI/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+
+### 🔄 How GrocerAI Works
+Customer
+   │
+   ▼
+Upload Grocery Bill
+   │
+   ▼
+OCR Processing
+   │
+   ▼
+Extract Bill Text
+   │
+   ▼
+AI Product Extraction
+   │
+   ▼
+Product + Quantity
+   │
+   ▼
+Check Product Database
+   │
+   ├── Available
+   │      │
+   │      ▼
+   │   Confirm Order
+   │      │
+   │      ▼
+   │   Payment / COD
+   │      │
+   │      ▼
+   │   Place Order
+   │
+   └── Not Available
+          │
+          ▼
+      Show Status
+
+###🛠️ Technologies Used
+- Backend
+Python
+Django
+SQLite
+- Frontend
+HTML
+Tailwind CSS
+JavaScript
+- AI / Machine Learning
+OpenAI API
+OCR
+AI-based product extraction
+Deep Learning
+- Database
+SQLite
+Django ORM
+- Development Tools
+Git
+GitHub
+Visual Studio Code
+Python Virtual Environment
+Colab
