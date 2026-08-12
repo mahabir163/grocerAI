@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="bg-gray-50 min-h-screen py-12">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+        <!-- Heading -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-green-700">
+                Confirm Your Order
+            </h1>
+
+            <p class="text-gray-600 mt-2">
+                Review your items before placing the order.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+            {% if products %}
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full">
+
+                    <thead class="bg-green-600 text-white">
+
+                        <tr>
+                            <th class="px-6 py-4 text-left">Product</th>
+                            <th class="px-6 py-4 text-center">Quantity</th>
+                            <th class="px-6 py-4 text-center">Price</th>
+                            <th class="px-6 py-4 text-center">Availability</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for product in products %}
+
+                        <tr class="border-b hover:bg-green-50 transition">
+
+                            <td class="px-6 py-4 font-medium text-gray-800">
+                                {{ product.name }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+                                {{ product.quantity }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center font-semibold text-green-700">
+                                ₹{{ product.price }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center">
+
+                                {% if product.status == "Available" %}
+
+                                <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+                                    ✓ Available
+                                </span>
+
+                                {% else %}
+
+                                <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm font-semibold">
+                                    ✕ {{ product.status }}
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="bg-gray-50 px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+
+                <div>
+
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        Total Items:
+                        <span class="text-green-600">
+                            {{ products|length }}
+                        </span>
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Please verify all products before confirming.
+                    </p>
+
+                </div>
+                {% if has_available_products %}
+                    <a href="{% url 'payments:payment' %}"
+                        class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition">
+                    Proceed to Payment →
+                    </a>
+                {% else %}
+                    <button
+                        class="inline-flex items-center gap-2 bg-gray-400 text-white font-semibold px-8 py-3 rounded-xl cursor-not-allowed"
+                        disabled>
+                            No Available Products
+                    </button>
+                    <a href="{% url 'home' %}"
+                        class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition">
+                        Return to Home
+                    </a>
+                {% endif %}
+
+            </div>
+
+            {% else %}
+
+            <div class="text-center py-20">
+
+                <div class="text-6xl mb-4">
+                    🛒
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-700">
+                    No Products Found
+                </h2>
+
+                <p class="text-gray-500 mt-2">
+                    Your order list is empty.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Trust Section -->
+
+<section class="py-16 bg-white">
+
+    <div class="max-w-6xl mx-auto px-4">
+
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-3">
+            Shop With Confidence
+        </h2>
+
+        <p class="text-gray-600 text-center mb-10">
+            Your privacy and satisfaction are our highest priorities.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <!-- Card -->
+
+            <div class="bg-green-50 rounded-2xl p-6 text-center shadow-sm hover:shadow-lg transition">
+
+                <div class="text-5xl mb-4">
+                    🔒
+                </div>
+
+                <h3 class="font-bold text-lg mb-2">
+                    Secure Payments
+                </h3>
+
+                <p class="text-gray-600 text-sm">
+                    All payments are protected using industry-standard encryption.
+                </p>
+
+            </div>
+
+            <div class="bg-green-50 rounded-2xl p-6 text-center shadow-sm hover:shadow-lg transition">
+
+                <div class="text-5xl mb-4">
+                    🚚
+                </div>
+
+                <h3 class="font-bold text-lg mb-2">
+                    Fast Delivery
+                </h3>
+
+                <p class="text-gray-600 text-sm">
+                    Fresh groceries delivered quickly to your doorstep.
+                </p>
+
+            </div>
+
+            <div class="bg-green-50 rounded-2xl p-6 text-center shadow-sm hover:shadow-lg transition">
+
+                <div class="text-5xl mb-4">
+                    ⭐
+                </div>
+
+                <h3 class="font-bold text-lg mb-2">
+                    Quality Guaranteed
+                </h3>
+
+                <p class="text-gray-600 text-sm">
+                    We carefully select high-quality products for every order.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

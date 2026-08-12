@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="py-12 bg-gray-100">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h1 class="text-3xl font-bold text-green-600 text-center mb-12">
+            You Can Place Your Order Through Our AI Chatbot or by Submitting a Bill
+        </h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+
+            <!-- ChatBot Card -->
+            <div
+                class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col h-full">
+
+                <h2 class="text-2xl font-bold text-green-600 mb-4">
+                    Order via ChatBot
+                </h2>
+
+                <img src="{% static 'images/order_AI.png' %}"
+                    alt="ChatBot"
+                    class="w-full h-72 object-contain rounded-lg">
+
+                <p class="text-gray-600 mt-6 flex-grow">
+                    You can place your order by interacting with our AI-powered chatbot.
+                    Just click the button below to start chatting and placing your order.
+                </p>
+
+                <br>
+                <p>
+                    *Please note that the chatbot is currently in beta and may not be able to handle all types of orders.*
+                </p>
+
+                <a href="#"
+                    class="mt-6 inline-block w-fit px-8 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold transition">
+                    Start Chatting
+                </a>
+
+            </div>
+
+            <!-- Bill Submit Card -->
+            <div
+                class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col h-full">
+
+                <h2 class="text-2xl font-bold text-green-600 mb-4">
+                    Order via Bill Submit
+                </h2>
+
+                <img src="{% static 'images/order_Bill.jpg' %}"
+                    alt="Bill Submit"
+                    class="w-full h-72 object-cover rounded-lg">
+
+                <p class="text-gray-600 mt-6 flex-grow">
+                    You can also place your order by submitting a bill. Upload your bill and our AI
+                    will automatically detect the products and process your order.
+                </p>
+
+                <div class="mt-6">
+                    <form method="post" action="{% url 'apps:order' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <input type="file"
+                        name="bill"
+                        class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:outline-none bg-green-600 hover:bg-green-700 text-white font-semibold transition"
+                        accept=".pdf,.jpg,.jpeg,.png">
+
+                    <p class="text-sm text-gray-500 mt-3">
+                        *Please upload a clear image of your bill.*
+                    </p>
+                    <button type="submit"
+                        class="mt-4 w-full px-6 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold transition">
+                        Submit Bill
+                    </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

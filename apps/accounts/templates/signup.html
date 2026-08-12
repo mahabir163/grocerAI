@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="min-h-screen bg-gradient-to-t from-green-50 to-white flex items-center justify-center px-6 py-10">
+
+    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden grid lg:grid-cols-2">
+
+        <!-- Left Side - Registration Form -->
+        <div class="p-10 lg:p-14">
+
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-800">
+                    Create Account
+                </h1>
+
+                <p class="text-gray-500 mt-2">
+                    Join GrocerAIM and start shopping smarter.
+                </p>
+            </div>
+
+            
+            <form class="space-y-5" method="POST" action="{% url 'app:signup' %}">
+                {% csrf_token %}
+                <!-- Username -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        required
+                        placeholder="Enter your username"
+                        class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition" name="username">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="Enter your email"
+                        class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition">
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        required
+                        placeholder="Create a password"
+                        class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition">
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        required
+                        placeholder="Confirm your password"
+                        class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition">
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full py-3 rounded-xl bg-gradient-to-r from-green-600 to-sky-500 text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition duration-300">
+                    Create Account
+                </button>
+
+            </form>
+
+            <div class="my-8 flex items-center">
+                <div class="flex-1 h-px bg-gray-300"></div>
+                <span class="px-4 text-gray-500">OR</span>
+                <div class="flex-1 h-px bg-gray-300"></div>
+            </div>
+
+            <button
+                class="w-full py-3 border rounded-xl hover:bg-gray-50 transition flex items-center justify-center gap-3">
+
+                <svg class="w-6 h-6" viewBox="0 0 48 48">
+                    <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 3l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.5-.4-3.5z"/>
+                    <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.3 18.9 12 24 12c3 0 5.7 1.1 7.8 3l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                    <path fill="#4CAF50" d="M24 44c5.2 0 10-2 13.5-5.3l-6.2-5.2C29.2 35.2 26.7 36 24 36c-5.3 0-9.7-3.3-11.4-8l-6.5 5C9.4 39.5 16.1 44 24 44z"/>
+                    <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-1.1 3.1-3.4 5.6-6.3 7.1l6.2 5.2C39.1 37 44 31.1 44 24c0-1.3-.1-2.5-.4-3.5z"/>
+                </svg>
+
+                Continue with Google
+
+            </button>
+
+            <p class="text-center mt-8 text-gray-600">
+                Already have an account?
+                <a href="#" class="text-green-600 font-semibold hover:text-green-700">
+                    Login
+                </a>
+            </p>
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="hidden lg:flex bg-gradient-to-br from-green-600 to-sky-500 items-center justify-center p-12">
+
+            <div class="text-center text-white">
+
+                <img
+                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=700"
+                    class="w-full max-w-md h-80 object-cover rounded-3xl shadow-2xl mb-8"
+                    alt="Groceries">
+
+                <h2 class="text-4xl font-bold mb-4">
+                    Shop Smarter
+                </h2>
+
+                <p class="text-lg text-green-50 leading-relaxed">
+                    Create your GrocerAIM account to enjoy AI-powered grocery recommendations,
+                    smart bill scanning, price comparison, and fast checkout.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

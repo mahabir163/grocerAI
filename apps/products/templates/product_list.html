@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="bg-gradient-to-b from-green-50 to-white py-16">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+        <div class="text-center mb-12">
+
+            {% if products %}
+                <h2 class="text-4xl md:text-5xl font-extrabold text-green-700">
+                    {{ products.0.category.name }}
+                </h2>
+            {% else %}
+                <h2 class="text-4xl md:text-5xl font-extrabold text-green-700">
+                    Products
+                </h2>
+            {% endif %}
+
+            <p class="mt-3 text-lg text-gray-600">
+                Fresh, healthy, and high-quality groceries delivered to your doorstep.
+            </p>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {% for product in products %}
+
+            <div class="bg-white rounded-3xl shadow-md hover:shadow-2xl overflow-hidden transition duration-300 hover:-translate-y-2 group">
+
+                <!-- Product Image -->
+                <div class="overflow-hidden">
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        class="w-full h-72 object-cover transition duration-500 group-hover:scale-110"
+                    >
+                </div>
+
+                <!-- Product Details -->
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                        {{ product.name }}
+                    </h3>
+
+                    <p class="text-gray-600 text-sm mb-5 line-clamp-2">
+                        {{ product.description }}
+                    </p>
+
+                    <div class="flex justify-between items-center mb-5">
+                        <span class="text-2xl font-bold text-green-600">
+                            ₹{{ product.price }} <p class="text-sm text-gray-500">Per {{ product.unit }}</p>
+                        </span>
+
+                    
+                    </div>
+
+                    <div class="flex justify-between items-center mb-6">
+
+                        <span class="text-gray-600">
+                            Stock:
+                            <span class="font-semibold text-gray-800">
+                                {{ product.stock_quantity }} {{ product.unit }} 
+                            </span>
+                        </span>
+
+                        {% if product.stock_quantity > 0 and product.stock_quantity %}
+                            <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-semibold">
+                                In Stock
+                            </span>
+                        {% else %}
+                            <span class="bg-red-100 text-red-600 text-xs px-3 py-1 rounded-full font-semibold">
+                                Out of Stock
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Button -->
+                    <button
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition duration-300">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-span-full">
+
+                <div class="bg-white rounded-3xl shadow-lg py-16 text-center">
+
+                    <img
+                        src="{% static 'images/empty-cart.jpg' %}"
+                        class="w-40 mx-auto mb-6"
+                        alt="No Products"
+                    >
+
+                    <h3 class="text-3xl font-bold text-gray-700">
+                        No Products Available
+                    </h3>
+
+                    <p class="text-gray-500 mt-3">
+                        Products for this category will be added soon.
+                    </p>
+
+                    <a href="{% url 'home' %}"
+                       class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl transition">
+                        Back to Home
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

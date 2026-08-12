@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Floating Chat Button -->
+<button id="chatToggle"
+    class="fixed bottom-6 right-6 w-16 h-16 bg-green-600 hover:bg-green-700 rounded-full shadow-2xl text-white text-3xl z-50 transition-all duration-300 hover:scale-110">
+
+    💬
+
+</button>
+
+<!-- Chat Popup -->
+<div id="chatPopup"
+    class="fixed bottom-24 right-6 w-[380px] h-[620px] bg-white rounded-3xl shadow-2xl border border-gray-200 hidden flex flex-col overflow-hidden z-50">
+
+    <!-- Header -->
+    <div class="bg-green-600 text-white p-5 flex justify-between items-center">
+
+        <div>
+
+            <h2 class="font-bold text-xl">
+                GrocerAI Assistant
+            </h2>
+
+            <p class="text-green-100 text-sm">
+                Online • Ready to help
+            </p>
+
+        </div>
+
+        <button id="closeChat"
+            class="text-2xl hover:text-red-200">
+            ✕
+        </button>
+
+    </div>
+
+    <!-- Messages -->
+    <div id="chatBody"
+        class="flex-1 overflow-y-auto p-5 space-y-4 bg-gray-50">
+
+        <!-- Bot -->
+
+        <div class="flex">
+
+            <div
+                class="bg-white rounded-2xl shadow px-4 py-3 max-w-[80%]">
+
+                👋 Hello!
+
+                <br><br>
+
+                Welcome to <b>GrocerAI</b>
+
+                <br>
+
+                Tell me what groceries you need.
+
+            </div>
+
+        </div>
+
+        <!-- User -->
+
+        <!--
+
+        <div class="flex justify-end">
+
+            <div class="bg-green-600 text-white rounded-2xl px-4 py-3">
+
+                2kg Onion
+
+            </div>
+
+        </div>
+
+        -->
+
+    </div>
+
+    <!-- Typing -->
+    <div id="typing"
+        class="hidden px-5 py-2 text-gray-500 text-sm">
+
+        🤖 Typing...
+
+    </div>
+
+    <!-- Input -->
+    <div class="border-t p-4">
+
+        <form id="chatForm"
+            class="flex gap-3">
+
+            <input
+                id="messageInput"
+                type="text"
+                placeholder="Type your grocery..."
+                class="flex-1 border rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+            <button
+                class="bg-green-600 hover:bg-green-700 text-white px-5 rounded-full">
+
+                ➤
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}
+
+<script>
+    const toggle = document.getElementById("chatToggle");
+const popup = document.getElementById("chatPopup");
+const closeBtn = document.getElementById("closeChat");
+
+toggle.onclick = () => {
+    popup.classList.remove("hidden");
+};
+
+closeBtn.onclick = () => {
+    popup.classList.add("hidden");
+};
+
+const form = document.getElementById("chatForm");
+const input = document.getElementById("messageInput");
+const body = document.getElementById("chatBody");
+
+form.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    if(input.value.trim()=="")
+        return;
+
+    body.innerHTML += `
+
+        <div class="flex justify-end">
+
+            <div class="bg-green-600 text-white px-4 py-3 rounded-2xl max-w-[80%]">
+
+                ${input.value}
+
+            </div>
+
+        </div>
+
+    `;
+
+    body.scrollTop = body.scrollHeight;
+
+    input.value="";
+});
+</script>

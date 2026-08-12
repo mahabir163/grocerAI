@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    {% block title %}<title>GrocerAI</title>{% endblock %}
+</head>
+<body>
+
+    <!--nav bar include in base-->
+    {% include 'nav.html' %}
+
+    {% block content %}
+    {% endblock %}
+    
+    {% block scripts %}
+    {% endblock %}
+
+    <!--messages-->
+    {% if messages %}
+<div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-4">
+
+    {% for message in messages %}
+    <div class="toast flex items-start gap-3 w-96 rounded-xl shadow-2xl overflow-hidden
+        {% if message.tags == 'success' %}
+            bg-green-600 text-white
+        {% elif message.tags == 'error' %}
+            bg-red-600 text-white
+        {% elif message.tags == 'warning' %}
+            bg-yellow-500 text-white
+        {% else %}
+            bg-blue-600 text-white
+        {% endif %}">
+
+        <!-- Left Border -->
+        <div class="w-2 bg-white/30"></div>
+
+        <!-- Content -->
+        <div class="flex-1 p-4">
+
+            <div class="flex justify-between items-center">
+
+                <div class="flex items-center gap-2">
+
+                    {% if message.tags == 'success' %}
+                    <span class="text-xl">✅</span>
+                    <h3 class="font-bold">Success</h3>
+
+                    {% elif message.tags == 'error' %}
+                    <span class="text-xl">❌</span>
+                    <h3 class="font-bold">Error</h3>
+
+                    {% elif message.tags == 'warning' %}
+                    <span class="text-xl">⚠️</span>
+                    <h3 class="font-bold">Warning</h3>
+
+                    {% else %}
+                    <span class="text-xl">ℹ️</span>
+                    <h3 class="font-bold">Info</h3>
+                    {% endif %}
+
+                </div>
+
+                <button onclick="closeToast(this)"
+                        class="text-2xl hover:opacity-70 transition">
+                    &times;
+                </button>
+
+            </div>
+
+            <p class="mt-2 text-sm">
+                {{ message }}
+            </p>
+
+            <!-- Progress Bar -->
+            <div class="mt-3 h-1 bg-white/20 rounded-full overflow-hidden">
+                <div class="progress h-full bg-white"></div>
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+<style>
+.progress{
+    width:100%;
+    animation:progress 5s linear forwards;
+}
+
+@keyframes progress{
+    from{width:100%;}
+    to{width:0;}
+}
+
+.toast{
+    animation:slideIn .35s ease;
+}
+
+@keyframes slideIn{
+    from{
+        transform:translateX(100%);
+        opacity:0;
+    }
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+.toast.hide{
+    animation:slideOut .35s ease forwards;
+}
+
+@keyframes slideOut{
+    to{
+        transform:translateX(120%);
+        opacity:0;
+    }
+}
+</style>
+
+<script>
+function closeToast(btn){
+    const toast = btn.closest(".toast");
+    toast.classList.add("hide");
+    setTimeout(()=>toast.remove(),350);
+}
+
+document.querySelectorAll(".toast").forEach((toast)=>{
+    setTimeout(()=>{
+        toast.classList.add("hide");
+        setTimeout(()=>toast.remove(),350);
+    },5000);
+});
+</script>
+{% endif %}
+    <!--include footer-->
+    {% include 'footer.html' %}
+</body>
+</html>
