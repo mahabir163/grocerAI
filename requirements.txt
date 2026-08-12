@@ -8,3 +8,4 @@ requests
 rapidocr_onnxruntime
 gunicorn
 python-dotenv
+whitenoise
