@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv(
     "django-insecure-development-key-change-this"
 )
 
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+DEBUG = True
 
 # Render / production
 ALLOWED_HOSTS = ["*"]
